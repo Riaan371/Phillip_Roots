@@ -87,6 +87,22 @@ em       { font-style:italic; color:var(--sage2); }
 .nav-links a:hover { color:var(--df); }
 .nav-cta { margin-left:16px; }
 
+/* ─────────────────────────────── MOBILE NAV / BURGER */
+.nav-burger {
+  display:none;
+  flex-direction:column; justify-content:center; align-items:center; gap:5px;
+  width:40px; height:40px;
+  background:none; border:none; cursor:pointer; padding:0;
+  z-index:600; position:relative;
+}
+.nav-burger span {
+  display:block; width:22px; height:1.5px; background:var(--navy);
+  transition:transform .3s var(--ease), opacity .25s var(--ease), background .2s;
+}
+#nav.menu-open .nav-burger span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+#nav.menu-open .nav-burger span:nth-child(2) { opacity:0; }
+#nav.menu-open .nav-burger span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+
 /* ─────────────────────────────── HERO */
 #hero {
   min-height:100vh; background:var(--fog);
@@ -442,7 +458,39 @@ footer {
   .team-grid { grid-template-columns:1fr; max-width:440px; }
   .values-grid { grid-template-columns:1fr 1fr; }
   .footer-top { grid-template-columns:1fr 1fr; }
-  .nav-links,.nav-cta { display:none; }
+
+  /* ── Mobile nav ── */
+  .nav-burger { display:flex; }
+  .nav-links {
+    position:fixed; inset:0; left:auto;
+    width:min(78vw,320px); height:100vh;
+    flex-direction:column; align-items:flex-start; justify-content:center;
+    gap:28px; padding:0 12vw 0 10vw;
+    background:var(--fog);
+    box-shadow:-12px 0 40px rgba(15,53,42,.12);
+    transform:translateX(100%); opacity:0;
+    transition:transform .4s var(--ease), opacity .3s var(--ease);
+    z-index:550;
+  }
+  .nav-links a { font-size:14px; letter-spacing:.14em; }
+  #nav.menu-open .nav-links { transform:translateX(0); opacity:1; }
+  .nav-cta {
+    position:fixed; left:10vw; bottom:48px;
+    margin-left:0; opacity:0; pointer-events:none;
+    transform:translateY(12px);
+    transition:opacity .3s var(--ease) .1s, transform .3s var(--ease) .1s;
+    z-index:550;
+  }
+  #nav.menu-open .nav-cta {
+    opacity:1; pointer-events:auto; transform:translateY(0);
+    width:min(78vw,320px); box-sizing:border-box; left:10vw;
+    text-align:center; justify-content:center;
+  }
+  .nav-overlay {
+    display:none; position:fixed; inset:0; background:rgba(15,53,42,.35);
+    opacity:0; transition:opacity .3s var(--ease); z-index:540;
+  }
+  #nav.menu-open .nav-overlay { display:block; opacity:1; }
 }
 @media(max-width:600px){
   .services-grid { grid-template-columns:1fr; }
@@ -450,6 +498,9 @@ footer {
   .footer-top { grid-template-columns:1fr; gap:36px; }
   h1 { font-size:38px; }
   h2 { font-size:30px; }
+  .hero-mark { width:min(90vw,500px); }
+  .hero-wordmark { font-size:42px; white-space:normal; }
+  .contact-details { flex-direction:column; gap:24px; align-items:center; }
 }
 </style>
 </head>
@@ -469,6 +520,10 @@ footer {
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="btn btn-primary nav-cta" style="padding:10px 22px;font-size:10px">Book a Call</a>
+  <button class="nav-burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-overlay" id="nav-overlay"></div>
 </nav>
 
 <!-- ══════════════════════ HERO ══════════════════════ -->
@@ -843,6 +898,23 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
+
+// ── MOBILE NAV (burger menu)
+const navBurger = document.getElementById('nav-burger');
+const navOverlay = document.getElementById('nav-overlay');
+function closeMenu() {
+  nav.classList.remove('menu-open');
+  navBurger.setAttribute('aria-expanded', 'false');
+}
+function toggleMenu() {
+  const open = nav.classList.toggle('menu-open');
+  navBurger.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+navBurger.addEventListener('click', toggleMenu);
+navOverlay.addEventListener('click', closeMenu);
+document.querySelectorAll('.nav-links a, .nav-cta').forEach(el => {
+  el.addEventListener('click', closeMenu);
+});
 
 // ── SCROLL REVEAL
 const revealEls = document.querySelectorAll('.reveal');
