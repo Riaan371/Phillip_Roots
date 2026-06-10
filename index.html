@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rooted. — Accounting · Tax · Advisory | Langebaan</title>
+<meta name="description" content="Rooted in purpose, built for growth. Professional accounting, tax and advisory services for Langebaan businesses and individuals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────── TOKENS */
+:root {
+  --df:      #0F352A;
+  --df2:     #1A4535;
+  --sage:    #79AE8A;
+  --sage2:   #8AAE8A;
+  --blue:    #7A9BB0;
+  --slate:   #334155;
+  --stone:   #E7ECEF;
+  --fog:     #F4F9F7;
+  --warm:    #F0EBE3;
+  --navy:    #1C2B38;
+  --mid:     #5A6A74;
+  --light:   #8A9BA8;
+  --white:   #FFFFFF;
+  --r:       5px;
+  --ease:    cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+/* ─────────────────────────────── BASE */
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { font-family:'Inter',sans-serif; font-weight:300; color:var(--navy); background:var(--white); overflow-x:hidden; }
+img  { display:block; max-width:100%; }
+a    { color:inherit; text-decoration:none; }
+
+/* ─────────────────────────────── TYPE SCALE */
+.label   { font:300 10px/1 'Inter',sans-serif; letter-spacing:.22em; text-transform:uppercase; color:var(--sage); }
+.serif   { font-family:'Cormorant Garamond',serif; font-weight:300; }
+h1       { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(44px,5.5vw,76px); line-height:1.08; letter-spacing:-.01em; }
+h2       { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(34px,4vw,56px); line-height:1.12; letter-spacing:-.01em; }
+h3       { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(20px,2.2vw,28px); line-height:1.25; }
+p        { font-size:clamp(15px,1.1vw,17px); line-height:1.75; color:var(--mid); font-weight:300; }
+.lead    { font-size:clamp(17px,1.4vw,21px); line-height:1.65; color:var(--mid); font-weight:300; }
+em       { font-style:italic; color:var(--sage2); }
+
+/* ─────────────────────────────── BUTTONS */
+.btn {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:14px 28px; border-radius:3px;
+  font:400 11px/1 'Inter',sans-serif; letter-spacing:.12em; text-transform:uppercase;
+  cursor:pointer; transition:all .25s var(--ease); border:1px solid transparent;
+}
+.btn-primary { background:var(--df); color:var(--white); border-color:var(--df); }
+.btn-primary:hover { background:var(--df2); border-color:var(--df2); transform:translateY(-1px); box-shadow:0 8px 24px rgba(15,53,42,.22); }
+.btn-outline { background:transparent; color:var(--df); border-color:rgba(15,53,42,.25); }
+.btn-outline:hover { border-color:var(--df); background:rgba(15,53,42,.04); }
+.btn-light { background:transparent; color:var(--white); border-color:rgba(255,255,255,.4); }
+.btn-light:hover { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.7); }
+.btn-sage { background:var(--sage); color:var(--white); border-color:var(--sage); }
+.btn-sage:hover { background:#6a9e7a; transform:translateY(-1px); box-shadow:0 8px 24px rgba(121,174,138,.3); }
+.arrow { font-size:14px; transition:transform .25s; }
+.btn:hover .arrow { transform:translateX(4px); }
+
+/* ─────────────────────────────── NAV */
+#nav {
+  position:fixed; top:0; left:0; right:0; z-index:500;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 5vw; height:72px;
+  transition:background .4s, box-shadow .4s, height .4s;
+}
+#nav.scrolled {
+  background:rgba(244,249,247,.96);
+  backdrop-filter:blur(16px);
+  box-shadow:0 1px 0 rgba(0,0,0,.07);
+  height:62px;
+}
+.nav-logo { display:flex; align-items:center; gap:10px; opacity:0; transition:opacity .5s ease; }
+.nav-logo.visible { opacity:1; }
+.nav-logo img { width:38px; height:38px; object-fit:contain; }
+.nav-logo .nav-wm { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:24px; color:var(--navy); }
+.nav-logo .nav-wm .cs { color:var(--sage2); }
+.nav-logo .nav-wm .cb { color:var(--blue); }
+.nav-logo .nav-wm .cd { color:var(--navy); }
+.nav-links { display:flex; align-items:center; gap:32px; list-style:none; }
+.nav-links a { font:400 11px/1 'Inter',sans-serif; letter-spacing:.1em; text-transform:uppercase; color:var(--slate); transition:color .2s; }
+.nav-links a:hover { color:var(--df); }
+.nav-cta { margin-left:16px; }
+
+/* ─────────────────────────────── HERO */
+#hero {
+  min-height:100vh; background:var(--fog);
+  display:flex; align-items:center; justify-content:center;
+  padding:120px 5vw 80px;
+  position:relative;
+}
+#hero::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(121,174,138,.3),transparent);
+}
+.hero-inner {
+  display:grid; grid-template-columns:3fr 2fr; gap:clamp(40px,6vw,100px);
+  align-items:center; max-width:1200px; width:100%;
+}
+.hero-logo { display:flex; flex-direction:column; align-items:center; gap:20px; }
+.hero-mark {
+  width:clamp(500px,56vw,740px);
+  aspect-ratio:16/9;
+  position:relative;
+}
+.hero-mark video {
+  width:100%; height:100%;
+  object-fit:cover; display:block;
+  opacity:0; transition:opacity .6s ease;
+}
+.hero-mark video.ready { opacity:1; }
+/* Keep static mark visible in nav / other sections */
+.hero-mark img { width:100%; height:100%; object-fit:contain; display:none; }
+.hero-wordmark {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:clamp(52px,6vw,80px); line-height:1; letter-spacing:.01em; white-space:nowrap;
+  text-align:center;
+}
+.hero-wordmark .cs { color:var(--sage2); }
+.hero-wordmark .cb { color:var(--blue); }
+.hero-wordmark .cd { color:var(--navy); }
+.hero-sub {
+  font:300 10px/1 'Inter',sans-serif; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--light); text-align:center;
+}
+
+.hero-copy {}
+.hero-copy .label { margin-bottom:24px; display:block; }
+.hero-copy h1 { margin-bottom:24px; }
+.hero-copy .lead { margin-bottom:40px; max-width:480px; }
+.hero-actions { display:flex; gap:12px; flex-wrap:wrap; }
+
+/* Lens Focus animation */
+.lens-target { opacity:0; }
+/* Lens Focus on the whole hero-logo block (video + wordmark together) */
+.lens-go .lens-target { animation:lensIn 2.6s cubic-bezier(.4,0,.2,1) .2s forwards; }
+.lens-go .hero-copy .label { animation:fadeUp .7s ease 2.2s both; }
+.lens-go .hero-copy h1 { animation:fadeUp .8s ease 2.45s both; }
+.lens-go .hero-copy .lead { animation:fadeUp .7s ease 2.7s both; }
+.lens-go .hero-actions { animation:fadeUp .6s ease 2.9s both; }
+.lens-go .scroll-hint { animation:fadeIn .6s ease 3.3s both; }
+
+@keyframes lensIn {
+  0%  { filter:blur(40px) brightness(.45); opacity:0; transform:scale(1.05); }
+  55% { filter:blur(10px) brightness(.8);  opacity:.7; }
+  85% { filter:blur(2px)  brightness(.97); opacity:.95; }
+  100%{ filter:blur(0)    brightness(1);   opacity:1;  transform:scale(1); }
+}
+@keyframes fadeUp { from{transform:translateY(12px);opacity:0} to{transform:translateY(0);opacity:1} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+/* Scroll hint */
+.scroll-hint {
+  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  font:300 9px/1 'Inter',sans-serif; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--light); opacity:0;
+}
+.scroll-hint::after {
+  content:''; width:1px; height:36px;
+  background:linear-gradient(180deg,var(--sage),transparent);
+  animation:lineGrow 1.5s ease infinite;
+}
+@keyframes lineGrow { 0%,100%{height:20px;opacity:.4} 50%{height:40px;opacity:.8} }
+
+/* ─────────────────────────────── VALUES */
+#values { background:var(--white); padding:72px 5vw; }
+.values-grid {
+  max-width:1200px; margin:0 auto;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:2px;
+  border:1px solid var(--stone);
+}
+.value-item {
+  padding:40px 32px; border-right:1px solid var(--stone);
+  transition:background .25s;
+}
+.value-item:last-child { border-right:none; }
+.value-item:hover { background:var(--fog); }
+.value-icon {
+  width:40px; height:40px; margin-bottom:20px;
+  background:var(--fog); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+}
+.value-icon svg { width:18px; height:18px; stroke:var(--sage); fill:none; stroke-width:1.5; stroke-linecap:round; }
+.value-item h3 { font-size:20px; margin-bottom:10px; color:var(--navy); }
+.value-item p { font-size:14px; line-height:1.65; }
+
+/* ─────────────────────────────── ABOUT */
+#about {
+  position:relative; padding:120px 5vw; background:var(--white);
+  overflow:hidden;
+}
+#about::before {
+  content:'';
+  position:absolute; inset:0;
+  background:url('about-bg-sprout.png') center center/cover no-repeat;
+  opacity:.08;
+  pointer-events:none;
+  z-index:0;
+}
+.about-inner {
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(48px,7vw,120px); align-items:center;
+}
+.about-text .label { display:block; margin-bottom:20px; }
+.about-text h2 { margin-bottom:28px; }
+.about-text .lead { margin-bottom:24px; }
+.about-text p { margin-bottom:20px; }
+.about-text .btn { margin-top:12px; }
+/* ─── ABOUT GROWTH-RING DISC ─── */
+.about-mark {
+  position:relative; display:flex; align-items:center; justify-content:center;
+  padding:40px 0;
+}
+.about-mark-disc {
+  width:clamp(280px,34vw,440px);
+  height:auto;
+  filter:drop-shadow(0 32px 80px rgba(15,53,42,.25)) drop-shadow(0 8px 24px rgba(0,0,0,.12));
+  transition:transform .4s ease;
+}
+.about-mark-disc:hover {
+  transform:translateY(-6px);
+}
+/* ─────────────────────────────── SERVICES */
+#services { padding:120px 5vw; background:var(--fog); }
+.section-header { text-align:center; max-width:640px; margin:0 auto 72px; }
+.section-header .label { display:block; margin-bottom:18px; }
+.section-header h2 { margin-bottom:20px; }
+.section-header p { }
+
+.services-grid {
+  max-width:1200px; margin:0 auto;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+}
+.service-card {
+  background:var(--white); padding:48px 36px;
+  border:1px solid var(--stone);
+  transition:all .3s var(--ease); position:relative; overflow:hidden;
+}
+.service-card::before {
+  content:''; position:absolute; top:0; left:0; width:3px; height:0;
+  background:var(--sage); transition:height .35s var(--ease);
+}
+.service-card:hover { transform:translateY(-4px); box-shadow:0 20px 48px rgba(15,53,42,.09); }
+.service-card:hover::before { height:100%; }
+.service-num {
+  font:300 11px/1 'Inter',sans-serif; letter-spacing:.18em;
+  color:var(--light); margin-bottom:20px; display:block;
+}
+.service-card h3 { margin-bottom:14px; }
+.service-card p { font-size:14.5px; line-height:1.7; }
+
+/* ─────────────────────────────── WHY — DARK */
+#why { padding:120px 5vw; background:var(--df); position:relative; overflow:hidden; }
+#why::before {
+  content:''; position:absolute; top:-200px; right:-200px;
+  width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle,rgba(121,174,138,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.why-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+.why-text .label { color:rgba(121,174,138,.8); display:block; margin-bottom:20px; }
+.why-text h2 { color:var(--white); margin-bottom:24px; }
+.why-text .lead { color:rgba(238,246,244,.7); margin-bottom:40px; }
+.why-text .btn { margin-top:8px; }
+.why-pillars { display:flex; flex-direction:column; gap:0; }
+.why-pillar {
+  padding:28px 0; border-bottom:1px solid rgba(255,255,255,.08);
+  display:flex; gap:20px; align-items:flex-start;
+}
+.why-pillar:first-child { border-top:1px solid rgba(255,255,255,.08); }
+.pillar-num {
+  font:300 11px/1 'Inter',sans-serif; letter-spacing:.12em;
+  color:var(--sage); min-width:28px; padding-top:4px;
+}
+.pillar-text h3 { color:var(--white); font-size:19px; margin-bottom:6px; }
+.pillar-text p { font-size:14px; color:rgba(238,246,244,.55); line-height:1.65; }
+
+/* ─────────────────────────────── PROCESS */
+#process { padding:120px 5vw; background:var(--white); }
+.process-grid {
+  max-width:1200px; margin:0 auto;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative;
+}
+.process-grid::before {
+  content:''; position:absolute; top:40px; left:12.5%; right:12.5%; height:1px;
+  background:linear-gradient(90deg,transparent,var(--sage),var(--blue),var(--sage),transparent);
+  z-index:0;
+}
+.process-step { text-align:center; padding:0 20px; position:relative; z-index:1; }
+.step-dot {
+  width:80px; height:80px; border-radius:50%; margin:0 auto 28px;
+  background:var(--fog); border:1px solid var(--stone);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cormorant Garamond',serif; font-weight:300; font-size:28px; color:var(--sage);
+  transition:all .3s; position:relative;
+}
+.process-step:hover .step-dot { background:var(--df); color:var(--white); border-color:var(--df); transform:scale(1.08); }
+.process-step h3 { font-size:18px; margin-bottom:10px; color:var(--navy); }
+.process-step p { font-size:13.5px; line-height:1.7; }
+
+/* ─────────────────────────────── TEAM */
+#team { padding:120px 5vw; background:var(--warm); }
+.team-grid { max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:72px; }
+.team-card {
+  background:var(--white); overflow:hidden;
+  border:1px solid rgba(0,0,0,.07);
+  transition:all .3s var(--ease);
+}
+.team-card:hover { transform:translateY(-6px); box-shadow:0 24px 56px rgba(15,53,42,.11); }
+.team-photo {
+  height:280px; position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.team-photo-bg {
+  position:absolute; inset:0;
+  background:linear-gradient(135deg,var(--df) 0%,var(--df2) 40%,#2D6B54 70%,#4F8A76 100%);
+}
+.team-initials {
+  position:relative; z-index:1;
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:72px; color:rgba(255,255,255,.25); letter-spacing:.05em;
+}
+.team-info { padding:32px; }
+.team-info h3 { margin-bottom:4px; }
+.team-role {
+  font:300 10px/1 'Inter',sans-serif; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--sage); margin-bottom:16px; display:block;
+}
+.team-info p { font-size:14px; line-height:1.7; }
+.team-years {
+  display:inline-block; margin-top:16px;
+  font:300 10px/1 'Inter',sans-serif; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--light); border-top:1px solid var(--stone); padding-top:12px;
+}
+
+/* ─────────────────────────────── FAQ */
+#faq { padding:120px 5vw; background:var(--fog); }
+.faq-inner { max-width:780px; margin:0 auto; }
+.faq-inner .section-header { text-align:left; max-width:none; margin-bottom:52px; }
+.faq-item { border-bottom:1px solid var(--stone); }
+.faq-q {
+  width:100%; background:none; border:none; padding:24px 0;
+  display:flex; justify-content:space-between; align-items:center; gap:20px;
+  cursor:pointer; text-align:left;
+  font-family:'Cormorant Garamond',serif; font-weight:400; font-size:20px; color:var(--navy);
+  transition:color .2s;
+}
+.faq-q:hover { color:var(--df); }
+.faq-icon { font-size:20px; color:var(--sage); transition:transform .3s; flex-shrink:0; line-height:1; }
+.faq-item.open .faq-icon { transform:rotate(45deg); }
+.faq-a { max-height:0; overflow:hidden; transition:max-height .4s var(--ease); }
+.faq-a-inner { padding:0 0 24px; }
+.faq-a-inner p { font-size:15px; line-height:1.75; }
+
+/* ─────────────────────────────── CONTACT */
+#contact { padding:120px 5vw; background:var(--df); text-align:center; position:relative; overflow:hidden; }
+#contact::before {
+  content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:800px; height:800px; border-radius:50%;
+  background:radial-gradient(circle,rgba(121,174,138,.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+.contact-inner { max-width:680px; margin:0 auto; position:relative; z-index:1; }
+.contact-inner .label { color:rgba(121,174,138,.8); display:block; margin-bottom:24px; }
+.contact-inner h2 { color:var(--white); margin-bottom:24px; }
+.contact-inner .lead { color:rgba(238,246,244,.65); margin-bottom:48px; }
+.contact-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.contact-details {
+  display:flex; gap:40px; justify-content:center; flex-wrap:wrap;
+  margin-top:64px; padding-top:48px;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+.contact-detail .cd-label {
+  font:300 9px/1 'Inter',sans-serif; letter-spacing:.2em; text-transform:uppercase;
+  color:rgba(238,246,244,.4); margin-bottom:8px; display:block;
+}
+.contact-detail .cd-val {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:18px; color:rgba(238,246,244,.8);
+}
+
+/* ─────────────────────────────── FOOTER */
+footer {
+  background:#111E18; padding:60px 5vw 32px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.footer-inner { max-width:1200px; margin:0 auto; }
+.footer-top { display:grid; grid-template-columns:2fr 1fr 1fr; gap:60px; margin-bottom:52px; }
+.footer-brand {}
+.footer-logo { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+.footer-logo img { width:36px; height:36px; object-fit:contain; }
+.footer-logo .fw { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:24px; color:rgba(238,246,244,.85); }
+.footer-logo .fw .cs { color:var(--sage); }
+.footer-logo .fw .cb { color:var(--blue); }
+.footer-tagline { font:300 13px/1.7 'Inter',sans-serif; color:rgba(238,246,244,.38); max-width:280px; }
+.footer-col h4 { font:400 10px/1 'Inter',sans-serif; letter-spacing:.18em; text-transform:uppercase; color:rgba(238,246,244,.35); margin-bottom:20px; }
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.footer-col ul a { font:300 14px/1 'Inter',sans-serif; color:rgba(238,246,244,.5); transition:color .2s; }
+.footer-col ul a:hover { color:rgba(238,246,244,.85); }
+.footer-bottom {
+  border-top:1px solid rgba(255,255,255,.06); padding-top:24px;
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+}
+.footer-copy { font:300 12px/1 'Inter',sans-serif; color:rgba(238,246,244,.25); }
+.footer-social { display:flex; gap:20px; }
+.footer-social a { font:300 11px/1 'Inter',sans-serif; letter-spacing:.1em; text-transform:uppercase; color:rgba(238,246,244,.3); transition:color .2s; }
+.footer-social a:hover { color:var(--sage); }
+
+/* ─────────────────────────────── SCROLL ANIMATIONS */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.revealed { opacity:1; transform:translateY(0); }
+.reveal-delay-1 { transition-delay:.1s; }
+.reveal-delay-2 { transition-delay:.2s; }
+.reveal-delay-3 { transition-delay:.3s; }
+.reveal-delay-4 { transition-delay:.4s; }
+
+/* ─────────────────────────────── DIVIDER */
+.rule {
+  width:48px; height:1px; background:var(--sage); margin:24px 0; opacity:.6;
+}
+.rule-center { margin:24px auto; }
+
+/* ─────────────────────────────── RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner { grid-template-columns:1fr; text-align:center; }
+  .hero-copy .lead { margin-left:auto; margin-right:auto; }
+  .hero-actions { justify-content:center; }
+  .hero-logo { align-items:center; }
+  .about-inner { grid-template-columns:1fr; }
+  .about-mark { order:-1; }
+  .services-grid { grid-template-columns:1fr 1fr; }
+  .why-inner { grid-template-columns:1fr; }
+  .process-grid { grid-template-columns:1fr 1fr; gap:48px; }
+  .process-grid::before { display:none; }
+  .team-grid { grid-template-columns:1fr; max-width:440px; }
+  .values-grid { grid-template-columns:1fr 1fr; }
+  .footer-top { grid-template-columns:1fr 1fr; }
+  .nav-links,.nav-cta { display:none; }
+}
+@media(max-width:600px){
+  .services-grid { grid-template-columns:1fr; }
+  .values-grid { grid-template-columns:1fr; }
+  .footer-top { grid-template-columns:1fr; gap:36px; }
+  h1 { font-size:38px; }
+  h2 { font-size:30px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════ NAV ══════════════════════ -->
+<nav id="nav">
+  <div class="nav-logo" id="nav-logo">
+    <img src="rooted-mark.png" alt="Rooted mark">
+    <div class="nav-wm"><span class="cd">R</span><span class="cs">o</span><span class="cb">o</span><span class="cd">ted</span><span class="cs">.</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="btn btn-primary nav-cta" style="padding:10px 22px;font-size:10px">Book a Call</a>
+</nav>
+
+<!-- ══════════════════════ HERO ══════════════════════ -->
+<section id="hero">
+  <div class="hero-inner">
+
+    <!-- LEFT: Logo (no animation) -->
+    <div class="hero-logo">
+      <div class="hero-wordmark"><span class="cd">R</span><span class="cs">o</span><span class="cb">o</span><span class="cd">ted</span><span class="cs">.</span></div>
+      <div class="hero-sub">Accounting &nbsp;&bull;&nbsp; Tax &nbsp;&bull;&nbsp; Advisory</div>
+      <div class="hero-mark">
+        <video
+          src="file:///C:/Users/payro/OneDrive/Desktop/Sparkbit/Quotes%20and%20Proposals/Phillip%20Wapenaar/Canva%20Video%20no%20background/Remove%20Background%20from%20Video.mp4"
+          autoplay muted loop playsinline
+          preload="auto"
+          poster="rooted-mark.png"
+          aria-label="Rooted mark animation"
+        ></video>
+      </div>
+    </div>
+
+    <!-- RIGHT: Copy -->
+    <div class="hero-copy">
+      <span class="label">Langebaan &mdash; Western Cape</span>
+      <h1>Rooted in <em>purpose.</em><br>Built for <em>growth.</em></h1>
+      <p class="lead">Professional accounting, tax and advisory services for Langebaan businesses and individuals. We're more than accountants — we're your financial foundation.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Book a Consultation <span class="arrow">&rarr;</span></a>
+        <a href="#services" class="btn btn-outline">Our Services</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ══════════════════════ VALUES ══════════════════════ -->
+<section id="values">
+  <div class="values-grid">
+    <div class="value-item reveal">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </div>
+      <h3>Mastery</h3>
+      <p>Achieve financial success with expert guidance built on 14+ years of industry experience.</p>
+    </div>
+    <div class="value-item reveal reveal-delay-1">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>Empowerment</h3>
+      <p>Tailored solutions that give you the clarity and confidence to make informed decisions.</p>
+    </div>
+    <div class="value-item reveal reveal-delay-2">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Cloud Technology</h3>
+      <p>Streamlined financial processes through leading cloud-based accounting platforms.</p>
+    </div>
+    <div class="value-item reveal reveal-delay-3">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <h3>Commitment</h3>
+      <p>A dedicated team ensuring exceptional, personalised service on every engagement.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ ABOUT ══════════════════════ -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <span class="label reveal">Our Story</span>
+      <h2 class="reveal">We are your <em>financial foundation</em></h2>
+      <div class="rule reveal"></div>
+      <p class="lead reveal">At Rooted, we believe that great financial advice starts with genuine relationships. We're not here to process your numbers and move on — we're here to understand your story.</p>
+      <p class="reveal">Based in Langebaan, we serve the individuals and businesses that make our community what it is. Our approach combines deep technical expertise with a personal, grounded style of service that puts your goals first.</p>
+      <p class="reveal">Whether you're a sole trader navigating your first tax season, a growing business needing cloud accounting, or an individual seeking long-term financial clarity — we bring the same care and rigour to every engagement.</p>
+      <a href="#contact" class="btn btn-primary reveal" style="margin-top:20px">Get in Touch <span class="arrow">&rarr;</span></a>
+    </div>
+    <div class="about-mark reveal">
+      <img class="about-mark-disc" src="about-mark-orb.png" alt="Rooted growth ring mark">
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ SERVICES ══════════════════════ -->
+<section id="services">
+  <div class="section-header">
+    <span class="label reveal">What We Do</span>
+    <h2 class="reveal">Accounting services <em>built around you</em></h2>
+    <p class="reveal">From bookkeeping to tax strategy, we offer a complete suite of financial services tailored to your needs.</p>
+  </div>
+  <div class="services-grid" style="max-width:1200px;margin:0 auto">
+    <div class="service-card reveal">
+      <span class="service-num">01</span>
+      <h3>Comprehensive Accounting</h3>
+      <p>From bookkeeping and financial statement drafting to tax planning and compliance — a holistic range of services to bolster your business.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-num">02</span>
+      <h3>Cloud Accounting</h3>
+      <p>We specialise in cloud accounting technologies to refine your financial processes. Real-time reporting, anywhere access, total clarity.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-num">03</span>
+      <h3>Business Consulting</h3>
+      <p>Invaluable insights to fine-tune your financial strategies, enhance efficiency, and boost profitability for sustainable growth.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-num">04</span>
+      <h3>Financial Analysis</h3>
+      <p>Thorough financial analysis, precise reports, and actionable insights that power confident business decisions.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-num">05</span>
+      <h3>Payroll Services</h3>
+      <p>Streamlined payroll procedures with cloud-based employee portals for easy access to payslips and tax documents.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <span class="service-num">06</span>
+      <h3>Tax Planning &amp; Preparation</h3>
+      <p>Effective tax strategies that minimise liabilities and ensure compliance, handled securely through our cloud-based tools.</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:52px" class="reveal">
+    <a href="#contact" class="btn btn-primary">Book a Consultation <span class="arrow">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- ══════════════════════ WHY ══════════════════════ -->
+<section id="why">
+  <div class="why-inner">
+    <div class="why-text">
+      <span class="label reveal">Why Rooted</span>
+      <h2 class="reveal" style="color:var(--white)">Accountants who understand <em style="color:var(--sage2)">your world</em></h2>
+      <div class="rule reveal" style="background:rgba(121,174,138,.4)"></div>
+      <p class="lead reveal">In the intricate world of finance, it's essential to have a partner who not only understands the numbers but also comprehends your unique aspirations and challenges.</p>
+      <a href="#contact" class="btn btn-light reveal" style="margin-top:8px">Start the Conversation <span class="arrow">&rarr;</span></a>
+    </div>
+    <div class="why-pillars">
+      <div class="why-pillar reveal">
+        <span class="pillar-num">01</span>
+        <div class="pillar-text">
+          <h3>Experienced Professionals</h3>
+          <p>Combined decades of industry experience across accounting, tax, and financial advisory.</p>
+        </div>
+      </div>
+      <div class="why-pillar reveal reveal-delay-1">
+        <span class="pillar-num">02</span>
+        <div class="pillar-text">
+          <h3>Customised Solutions</h3>
+          <p>No two clients are the same. Every strategy is built specifically around your situation and goals.</p>
+        </div>
+      </div>
+      <div class="why-pillar reveal reveal-delay-2">
+        <span class="pillar-num">03</span>
+        <div class="pillar-text">
+          <h3>Cutting-Edge Technology</h3>
+          <p>We leverage the best cloud accounting platforms to give you real-time visibility and control.</p>
+        </div>
+      </div>
+      <div class="why-pillar reveal reveal-delay-3">
+        <span class="pillar-num">04</span>
+        <div class="pillar-text">
+          <h3>Client-Centric Approach</h3>
+          <p>We succeed when you succeed. Your goals are our goals — always.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ PROCESS ══════════════════════ -->
+<section id="process">
+  <div class="section-header" style="max-width:1200px;margin:0 auto 72px">
+    <span class="label reveal">How We Work</span>
+    <h2 class="reveal">A clear path <em>forward</em></h2>
+    <p class="reveal">Every financial journey starts with a conversation. From there, we build a clear, structured path together.</p>
+  </div>
+  <div class="process-grid" style="max-width:1200px;margin:0 auto">
+    <div class="process-step reveal">
+      <div class="step-dot">01</div>
+      <h3>Consultation</h3>
+      <p>We listen. We learn your goals, challenges, and what success means to you.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-1">
+      <div class="step-dot">02</div>
+      <h3>Strategy</h3>
+      <p>We craft a tailored financial plan built around your specific needs and ambitions.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="step-dot">03</div>
+      <h3>Implementation</h3>
+      <p>We put the plan into action — with precision, transparency, and clear communication.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-3">
+      <div class="step-dot">04</div>
+      <h3>Growth</h3>
+      <p>We monitor, adapt, and grow with you — your success is an ongoing partnership.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ TEAM ══════════════════════ -->
+<section id="team">
+  <div class="section-header" style="max-width:1200px;margin:0 auto 0">
+    <span class="label reveal">The People Behind Rooted</span>
+    <h2 class="reveal">Built on <em>experience,</em><br>driven by <em>purpose</em></h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <div class="team-photo-bg"></div>
+        <div class="team-initials">PW</div>
+      </div>
+      <div class="team-info">
+        <h3>Philip Wapenaar</h3>
+        <span class="team-role">Managing Director &mdash; AGA (SA)</span>
+        <p>Philip's expertise goes beyond figures. With a genuine passion for helping individuals reach their goals, he recognises that financial success is about creating opportunities and securing futures.</p>
+        <span class="team-years">14 years experience</span>
+      </div>
+    </div>
+    <div class="team-card reveal reveal-delay-2">
+      <div class="team-photo">
+        <div class="team-photo-bg" style="background:linear-gradient(135deg,#1A4535 0%,#2D6B54 40%,#4F8A76 70%,#72A898 100%)"></div>
+        <div class="team-initials">CW</div>
+      </div>
+      <div class="team-info">
+        <h3>Chantelle Wapenaar</h3>
+        <span class="team-role">Partner</span>
+        <p>Chantelle consistently surpasses expectations. Her creativity, combined with meticulous attention to detail, brings innovative solutions to complex financial challenges.</p>
+        <span class="team-years">16 years experience</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ FAQ ══════════════════════ -->
+<section id="faq">
+  <div class="faq-inner">
+    <div class="section-header reveal">
+      <span class="label">Common Questions</span>
+      <h2>Honest answers to <em>real questions</em></h2>
+      <div class="rule"></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What industries do you specialise in?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>We work across a wide range of industries in the Langebaan and broader West Coast area — from hospitality and tourism businesses, to retail, professional services, property, and individual clients. Our personalised approach means we adapt our expertise to fit your industry's specific requirements.</p>
+      </div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How do your cloud accounting solutions work?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>We use leading platforms like Xero, QuickBooks, and Sage to give you real-time visibility of your finances from any device. We handle the setup, training, and ongoing support — so you get the benefits of cutting-edge technology without the complexity.</p>
+      </div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Do you offer personalised financial consultations?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>Absolutely. Every client engagement begins with a consultation where we take the time to understand your goals, challenges, and circumstances. There's no one-size-fits-all approach here — every recommendation we make is built specifically for you.</p>
+      </div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How do you ensure the security of my financial data?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>We take data security seriously. All cloud platforms we use employ bank-level encryption and multi-factor authentication. We also maintain strict internal protocols around data access and confidentiality, and we only work with SARS-compliant, SOC 2-certified platforms.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CONTACT ══════════════════════ -->
+<section id="contact">
+  <div class="contact-inner">
+    <span class="label">Let&rsquo;s Talk</span>
+    <h2>Ready to build something <em style="color:var(--sage2)">lasting?</em></h2>
+    <div class="rule rule-center" style="background:rgba(121,174,138,.4)"></div>
+    <p class="lead">Whether you have a question, a challenge, or simply want to explore how we can help — we'd love to hear from you. No pressure, no jargon. Just an honest conversation.</p>
+    <div class="contact-actions">
+      <a href="mailto:info@financedeck.co.za" class="btn btn-sage">Send us a Message <span class="arrow">&rarr;</span></a>
+      <a href="tel:+27731148210" class="btn btn-light">+27 73 114 8210</a>
+    </div>
+    <div class="contact-details">
+      <div class="contact-detail">
+        <span class="cd-label">Location</span>
+        <span class="cd-val">193 Sunbird Drive, Langebaan</span>
+      </div>
+      <div class="contact-detail">
+        <span class="cd-label">Email</span>
+        <span class="cd-val">info@financedeck.co.za</span>
+      </div>
+      <div class="contact-detail">
+        <span class="cd-label">Phone</span>
+        <span class="cd-val">+27 73 114 8210</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="rooted-mark.png" alt="Rooted">
+          <div class="fw"><span class="cs">R</span><span class="cb">o</span><span style="color:rgba(238,246,244,.85)">oted</span><span class="cs">.</span></div>
+        </div>
+        <p class="footer-tagline">Rooted in purpose. Built for growth. Accounting, tax and advisory services in Langebaan, Western Cape.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#team">The Team</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@financedeck.co.za">info@financedeck.co.za</a></li>
+          <li><a href="tel:+27731148210">+27 73 114 8210</a></li>
+          <li><a href="#">193 Sunbird Drive, Langebaan</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2024 Rooted. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── LENS FOCUS on load
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('hero').classList.add('lens-go');
+    setTimeout(() => {
+      document.getElementById('nav-logo').classList.add('visible');
+    }, 2400);
+  }, 300);
+});
+
+// ── NAV scroll state
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// ── SCROLL REVEAL
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => io.observe(el));
+
+// ── HERO VIDEO — skip zoom-in intro, fade in once stable
+(function() {
+  const v = document.querySelector('.hero-mark video');
+  if (!v) return;
+  v.addEventListener('loadedmetadata', () => {
+    v.currentTime = 2.5; // skip the initial zoom-out frames
+  });
+  v.addEventListener('seeked', () => {
+    v.classList.add('ready'); // fade in now that we're on a stable frame
+  });
+})();
+
+// ── FAQ accordion
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-a').style.maxHeight = null;
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    const a = item.querySelector('.faq-a');
+    a.style.maxHeight = a.scrollHeight + 'px';
+  }
+}
+</script>
+</body>
+</html>
