@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rooted — Combined Logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Page: white, centred, clean for screenshot */
+body {
+  background: #FFFFFF;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  padding: 60px 40px;
+}
+
+/* ── LOGO UNIT ── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: #FFFFFF;
+  padding: 40px 52px;
+}
+
+/* ── STUMP MARK ── */
+/* object-fit: contain shows the full organic edge — no crop */
+.mark {
+  flex-shrink: 0;
+}
+.mark img {
+  display: block;
+  object-fit: contain;
+}
+
+/* ── TEXT BLOCK ── */
+.text-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ── WORDMARK ── */
+.wordmark {
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+/* Individual letter colours matching the actual logo */
+.c-dark { color: #1C2B38; }   /* R, t, e, d        */
+.c-sage { color: #8AAE8A; }   /* first o + dot     */
+.c-blue { color: #7A9BB0; }   /* second o          */
+
+/* ── TAGLINE ── */
+.tagline {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8A9BA8;
+}
+
+/* ════════════════════════════════════════
+   SIZE A — Large (primary / web hero)
+   ════════════════════════════════════════ */
+.size-a .mark img  { width: 148px; height: 148px; }
+.size-a .wordmark  { font-size: 80px; }
+.size-a .tagline   { font-size: 11px; margin-top: 10px; }
+
+/* ════════════════════════════════════════
+   SIZE B — Medium (email / social header)
+   ════════════════════════════════════════ */
+.size-b .logo { padding: 28px 36px; gap: 20px; }
+.size-b .mark img  { width: 90px; height: 90px; }
+.size-b .wordmark  { font-size: 50px; }
+.size-b .tagline   { font-size: 9px; margin-top: 7px; }
+
+/* ════════════════════════════════════════
+   SIZE C — Small (favicon / watermark)
+   ════════════════════════════════════════ */
+.size-c .logo { padding: 20px 28px; gap: 14px; }
+.size-c .mark img  { width: 52px; height: 52px; }
+.size-c .wordmark  { font-size: 30px; }
+.size-c .tagline   { font-size: 7px; margin-top: 5px; letter-spacing: 0.16em; }
+
+/* ── Section labels ── */
+.label {
+  font: 300 9px/1 'Inter', sans-serif;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: #C4CDD2;
+}
+
+/* ── Export tip ── */
+.tip {
+  font: 300 10px/1.7 'Inter', sans-serif;
+  color: #B8C4CA; letter-spacing: 0.04em;
+  text-align: center; padding-bottom: 10px;
+}
+.tip strong { color: #7A8E96; font-weight: 400; }
+</style>
+</head>
+<body>
+
+<p class="label">Primary — Large</p>
+<div class="logo size-a">
+  <div class="mark">
+    <img src="rooted-mark.png" alt="Rooted mark">
+  </div>
+  <div class="text-block">
+    <div class="wordmark">
+      <span class="c-dark">R</span><span class="c-sage">o</span><span class="c-blue">o</span><span class="c-dark">ted</span><span class="c-sage">.</span>
+    </div>
+    <div class="tagline">Accounting &nbsp;&bull;&nbsp; Tax &nbsp;&bull;&nbsp; Advisory</div>
+  </div>
+</div>
+
+<p class="label">Medium — Email / Proposals</p>
+<div class="size-b">
+  <div class="logo">
+    <div class="mark">
+      <img src="rooted-mark.png" alt="Rooted mark">
+    </div>
+    <div class="text-block">
+      <div class="wordmark">
+        <span class="c-dark">R</span><span class="c-sage">o</span><span class="c-blue">o</span><span class="c-dark">ted</span><span class="c-sage">.</span>
+      </div>
+      <div class="tagline">Accounting &nbsp;&bull;&nbsp; Tax &nbsp;&bull;&nbsp; Advisory</div>
+    </div>
+  </div>
+</div>
+
+<p class="label">Small — Watermark / Compact</p>
+<div class="size-c">
+  <div class="logo">
+    <div class="mark">
+      <img src="rooted-mark.png" alt="Rooted mark">
+    </div>
+    <div class="text-block">
+      <div class="wordmark">
+        <span class="c-dark">R</span><span class="c-sage">o</span><span class="c-blue">o</span><span class="c-dark">ted</span><span class="c-sage">.</span>
+      </div>
+      <div class="tagline">Accounting &nbsp;&bull;&nbsp; Tax &nbsp;&bull;&nbsp; Advisory</div>
+    </div>
+  </div>
+</div>
+
+<p class="tip">
+  <strong>Export to PNG in Chrome:</strong> Right-click the logo &rarr; Inspect &rarr; right-click the highlighted
+  <code>.logo</code> element &rarr; <em>Capture node screenshot</em><br>
+  Keep <strong>rooted-mark.png</strong> in the same folder as this file.
+</p>
+
+</body>
+</html>
