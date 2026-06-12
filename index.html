@@ -836,4 +836,92 @@ footer {
           <img src="rooted-mark.png" alt="Rooted">
           <div class="fw"><span class="cs">R</span><span class="cb">o</span><span style="color:rgba(238,246,244,.85)">oted</span><span class="cs">.</span></div>
         </div>
-        <p class="footer-t
+        <p class="footer-tagline">Rooted in purpose. Built for growth. Accounting, tax and advisory services in Langebaan, Western Cape.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#team">The Team</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@financedeck.co.za">info@financedeck.co.za</a></li>
+          <li><a href="tel:+27731148210">+27 73 114 8210</a></li>
+          <li><a href="#">193 Sunbird Drive, Langebaan</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2024 Rooted. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── LENS FOCUS on load
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('hero').classList.add('lens-go');
+    setTimeout(() => {
+      document.getElementById('nav-logo').classList.add('visible');
+    }, 2400);
+  }, 300);
+});
+
+// ── NAV scroll state
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// ── SCROLL REVEAL
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => io.observe(el));
+
+// ── HERO VIDEO — skip zoom-in intro, fade in once stable
+(function() {
+  const v = document.querySelector('.hero-mark video');
+  if (!v) return;
+  v.addEventListener('loadedmetadata', () => {
+    v.currentTime = 2.5; // skip the initial zoom-out frames
+  });
+  v.addEventListener('seeked', () => {
+    v.classList.add('ready'); // fade in now that we're on a stable frame
+  });
+})();
+
+// ── FAQ accordion
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-a').style.maxHeight = null;
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    const a = item.querySelector('.faq-a');
+    a.style.maxHeight = a.scrollHeight + 'px';
+  }
+}
+</script>
+</body>
+</html>
