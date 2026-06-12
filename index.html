@@ -467,7 +467,10 @@ footer {
   font-size:clamp(160px,26vw,440px); user-select:none;
 }
 .deco-watermark.on-dark { color:var(--white); opacity:.035; }
-@media(max-width:900px){ .deco { display:none; } }
+@media(max-width:900px){
+  .deco-stripes, .deco-ring { display:none; }
+  .deco-watermark { font-size:clamp(90px,30vw,200px); }
+}
 
 /* ─────────────────────────────── RESPONSIVE */
 @media(max-width:900px){
