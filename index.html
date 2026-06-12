@@ -87,28 +87,12 @@ em       { font-style:italic; color:var(--sage2); }
 .nav-links a:hover { color:var(--df); }
 .nav-cta { margin-left:16px; }
 
-/* ─────────────────────────────── MOBILE NAV / BURGER */
-.nav-burger {
-  display:none;
-  flex-direction:column; justify-content:center; align-items:center; gap:5px;
-  width:40px; height:40px;
-  background:none; border:none; cursor:pointer; padding:0;
-  z-index:600; position:relative;
-}
-.nav-burger span {
-  display:block; width:22px; height:1.5px; background:var(--navy);
-  transition:transform .3s var(--ease), opacity .25s var(--ease), background .2s;
-}
-#nav.menu-open .nav-burger span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
-#nav.menu-open .nav-burger span:nth-child(2) { opacity:0; }
-#nav.menu-open .nav-burger span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
-
 /* ─────────────────────────────── HERO */
 #hero {
   min-height:100vh; background:var(--fog);
   display:flex; align-items:center; justify-content:center;
   padding:120px 5vw 80px;
-  position:relative;
+  position:relative; overflow:hidden;
 }
 #hero::after {
   content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
@@ -117,6 +101,7 @@ em       { font-style:italic; color:var(--sage2); }
 .hero-inner {
   display:grid; grid-template-columns:3fr 2fr; gap:clamp(40px,6vw,100px);
   align-items:center; max-width:1200px; width:100%;
+  position:relative; z-index:1;
 }
 .hero-logo { display:flex; flex-direction:column; align-items:center; gap:20px; }
 .hero-mark {
@@ -185,11 +170,12 @@ em       { font-style:italic; color:var(--sage2); }
 @keyframes lineGrow { 0%,100%{height:20px;opacity:.4} 50%{height:40px;opacity:.8} }
 
 /* ─────────────────────────────── VALUES */
-#values { background:var(--white); padding:72px 5vw; }
+#values { background:var(--white); padding:72px 5vw; position:relative; overflow:hidden; }
 .values-grid {
   max-width:1200px; margin:0 auto;
   display:grid; grid-template-columns:repeat(4,1fr); gap:2px;
   border:1px solid var(--stone);
+  position:relative; z-index:1; background:var(--white);
 }
 .value-item {
   padding:40px 32px; border-right:1px solid var(--stone);
@@ -244,8 +230,8 @@ em       { font-style:italic; color:var(--sage2); }
   transform:translateY(-6px);
 }
 /* ─────────────────────────────── SERVICES */
-#services { padding:120px 5vw; background:var(--fog); }
-.section-header { text-align:center; max-width:640px; margin:0 auto 72px; }
+#services { padding:120px 5vw; background:var(--fog); position:relative; overflow:hidden; }
+.section-header { text-align:center; max-width:640px; margin:0 auto 72px; position:relative; z-index:1; }
 .section-header .label { display:block; margin-bottom:18px; }
 .section-header h2 { margin-bottom:20px; }
 .section-header p { }
@@ -253,6 +239,7 @@ em       { font-style:italic; color:var(--sage2); }
 .services-grid {
   max-width:1200px; margin:0 auto;
   display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+  position:relative; z-index:1;
 }
 .service-card {
   background:var(--white); padding:48px 36px;
@@ -280,6 +267,7 @@ em       { font-style:italic; color:var(--sage2); }
   background:radial-gradient(circle,rgba(121,174,138,.08) 0%,transparent 70%);
   pointer-events:none;
 }
+.why-inner { position:relative; z-index:1; }
 .why-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
 .why-text .label { color:rgba(121,174,138,.8); display:block; margin-bottom:20px; }
 .why-text h2 { color:var(--white); margin-bottom:24px; }
@@ -299,10 +287,10 @@ em       { font-style:italic; color:var(--sage2); }
 .pillar-text p { font-size:14px; color:rgba(238,246,244,.55); line-height:1.65; }
 
 /* ─────────────────────────────── PROCESS */
-#process { padding:120px 5vw; background:var(--white); }
+#process { padding:120px 5vw; background:var(--white); position:relative; overflow:hidden; }
 .process-grid {
   max-width:1200px; margin:0 auto;
-  display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; z-index:1;
 }
 .process-grid::before {
   content:''; position:absolute; top:40px; left:12.5%; right:12.5%; height:1px;
@@ -322,8 +310,8 @@ em       { font-style:italic; color:var(--sage2); }
 .process-step p { font-size:13.5px; line-height:1.7; }
 
 /* ─────────────────────────────── TEAM */
-#team { padding:120px 5vw; background:var(--warm); }
-.team-grid { max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:72px; }
+#team { padding:120px 5vw; background:var(--warm); position:relative; overflow:hidden; }
+.team-grid { max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:72px; position:relative; z-index:1; }
 .team-card {
   background:var(--white); overflow:hidden;
   border:1px solid rgba(0,0,0,.07);
@@ -357,8 +345,8 @@ em       { font-style:italic; color:var(--sage2); }
 }
 
 /* ─────────────────────────────── FAQ */
-#faq { padding:120px 5vw; background:var(--fog); }
-.faq-inner { max-width:780px; margin:0 auto; }
+#faq { padding:120px 5vw; background:var(--fog); position:relative; overflow:hidden; }
+.faq-inner { max-width:780px; margin:0 auto; position:relative; z-index:1; }
 .faq-inner .section-header { text-align:left; max-width:none; margin-bottom:52px; }
 .faq-item { border-bottom:1px solid var(--stone); }
 .faq-q {
@@ -443,6 +431,31 @@ footer {
 }
 .rule-center { margin:24px auto; }
 
+/* ─────────────────────────────── DECORATIVE SHAPES */
+.deco { position:absolute; pointer-events:none; z-index:0; }
+.deco-stripes {
+  width:180px; height:180px;
+  background:repeating-linear-gradient(45deg, var(--sage) 0 3px, transparent 3px 16px);
+  opacity:.16;
+}
+.deco-stripes.light { background:repeating-linear-gradient(45deg, var(--sage2) 0 3px, transparent 3px 16px); opacity:.12; }
+.deco-ring {
+  border-radius:50%; border:2px solid var(--blue); opacity:.22;
+}
+.deco-ring.sage { border-color:var(--sage2); }
+.deco-dot {
+  border-radius:50%; opacity:.45;
+}
+.deco-cross { width:56px; height:56px; opacity:.3; }
+.deco-cross::before,.deco-cross::after {
+  content:''; position:absolute; top:50%; left:0; width:100%; height:5px; border-radius:3px;
+  background:var(--sage2);
+}
+.deco-cross::before { transform:translateY(-50%) rotate(45deg); }
+.deco-cross::after  { transform:translateY(-50%) rotate(-45deg); }
+.deco-cross.blue::before,.deco-cross.blue::after { background:var(--blue); }
+@media(max-width:900px){ .deco { display:none; } }
+
 /* ─────────────────────────────── RESPONSIVE */
 @media(max-width:900px){
   .hero-inner { grid-template-columns:1fr; text-align:center; }
@@ -458,39 +471,7 @@ footer {
   .team-grid { grid-template-columns:1fr; max-width:440px; }
   .values-grid { grid-template-columns:1fr 1fr; }
   .footer-top { grid-template-columns:1fr 1fr; }
-
-  /* ── Mobile nav ── */
-  .nav-burger { display:flex; }
-  .nav-links {
-    position:fixed; inset:0; left:auto;
-    width:min(78vw,320px); height:100vh;
-    flex-direction:column; align-items:flex-start; justify-content:center;
-    gap:28px; padding:0 12vw 0 10vw;
-    background:var(--fog);
-    box-shadow:-12px 0 40px rgba(15,53,42,.12);
-    transform:translateX(100%); opacity:0;
-    transition:transform .4s var(--ease), opacity .3s var(--ease);
-    z-index:550;
-  }
-  .nav-links a { font-size:14px; letter-spacing:.14em; }
-  #nav.menu-open .nav-links { transform:translateX(0); opacity:1; }
-  .nav-cta {
-    position:fixed; left:10vw; bottom:48px;
-    margin-left:0; opacity:0; pointer-events:none;
-    transform:translateY(12px);
-    transition:opacity .3s var(--ease) .1s, transform .3s var(--ease) .1s;
-    z-index:550;
-  }
-  #nav.menu-open .nav-cta {
-    opacity:1; pointer-events:auto; transform:translateY(0);
-    width:min(78vw,320px); box-sizing:border-box; left:10vw;
-    text-align:center; justify-content:center;
-  }
-  .nav-overlay {
-    display:none; position:fixed; inset:0; background:rgba(15,53,42,.35);
-    opacity:0; transition:opacity .3s var(--ease); z-index:540;
-  }
-  #nav.menu-open .nav-overlay { display:block; opacity:1; }
+  .nav-links,.nav-cta { display:none; }
 }
 @media(max-width:600px){
   .services-grid { grid-template-columns:1fr; }
@@ -498,9 +479,6 @@ footer {
   .footer-top { grid-template-columns:1fr; gap:36px; }
   h1 { font-size:38px; }
   h2 { font-size:30px; }
-  .hero-mark { width:min(90vw,500px); }
-  .hero-wordmark { font-size:42px; white-space:normal; }
-  .contact-details { flex-direction:column; gap:24px; align-items:center; }
 }
 </style>
 </head>
@@ -520,14 +498,13 @@ footer {
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="btn btn-primary nav-cta" style="padding:10px 22px;font-size:10px">Book a Call</a>
-  <button class="nav-burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="nav-overlay" id="nav-overlay"></div>
 </nav>
 
 <!-- ══════════════════════ HERO ══════════════════════ -->
 <section id="hero">
+  <div class="deco deco-stripes" style="top:-40px;left:-40px"></div>
+  <div class="deco deco-ring" style="width:260px;height:260px;right:-90px;bottom:60px"></div>
+  <div class="deco deco-dot" style="width:90px;height:90px;background:var(--sage2);opacity:.18;left:6%;bottom:14%"></div>
   <div class="hero-inner">
 
     <!-- LEFT: Logo (no animation) -->
@@ -562,6 +539,7 @@ footer {
 
 <!-- ══════════════════════ VALUES ══════════════════════ -->
 <section id="values">
+  <div class="deco deco-cross" style="top:18px;right:6%"></div>
   <div class="values-grid">
     <div class="value-item reveal">
       <div class="value-icon">
@@ -614,6 +592,8 @@ footer {
 
 <!-- ══════════════════════ SERVICES ══════════════════════ -->
 <section id="services">
+  <div class="deco deco-ring sage" style="width:320px;height:320px;left:-120px;bottom:-80px"></div>
+  <div class="deco deco-cross blue" style="top:64px;right:5%"></div>
   <div class="section-header">
     <span class="label reveal">What We Do</span>
     <h2 class="reveal">Accounting services <em>built around you</em></h2>
@@ -658,6 +638,8 @@ footer {
 
 <!-- ══════════════════════ WHY ══════════════════════ -->
 <section id="why">
+  <div class="deco deco-stripes light" style="bottom:-30px;left:-30px"></div>
+  <div class="deco deco-ring sage" style="width:200px;height:200px;border-color:rgba(121,174,138,.35);right:8%;top:50%"></div>
   <div class="why-inner">
     <div class="why-text">
       <span class="label reveal">Why Rooted</span>
@@ -701,6 +683,7 @@ footer {
 
 <!-- ══════════════════════ PROCESS ══════════════════════ -->
 <section id="process">
+  <div class="deco deco-dot" style="width:70px;height:70px;background:var(--sage2);opacity:.2;left:4%;top:24px"></div>
   <div class="section-header" style="max-width:1200px;margin:0 auto 72px">
     <span class="label reveal">How We Work</span>
     <h2 class="reveal">A clear path <em>forward</em></h2>
@@ -732,6 +715,8 @@ footer {
 
 <!-- ══════════════════════ TEAM ══════════════════════ -->
 <section id="team">
+  <div class="deco deco-cross blue" style="top:48px;left:6%"></div>
+  <div class="deco deco-ring" style="width:240px;height:240px;right:-80px;bottom:-80px"></div>
   <div class="section-header" style="max-width:1200px;margin:0 auto 0">
     <span class="label reveal">The People Behind Rooted</span>
     <h2 class="reveal">Built on <em>experience,</em><br>driven by <em>purpose</em></h2>
@@ -766,6 +751,7 @@ footer {
 
 <!-- ══════════════════════ FAQ ══════════════════════ -->
 <section id="faq">
+  <div class="deco deco-ring sage" style="width:280px;height:280px;right:-100px;bottom:-100px"></div>
   <div class="faq-inner">
     <div class="section-header reveal">
       <span class="label">Common Questions</span>
@@ -813,6 +799,8 @@ footer {
 
 <!-- ══════════════════════ CONTACT ══════════════════════ -->
 <section id="contact">
+  <div class="deco deco-stripes light" style="top:-30px;right:-30px"></div>
+  <div class="deco deco-ring sage" style="width:220px;height:220px;border-color:rgba(121,174,138,.3);left:6%;bottom:8%"></div>
   <div class="contact-inner">
     <span class="label">Let&rsquo;s Talk</span>
     <h2>Ready to build something <em style="color:var(--sage2)">lasting?</em></h2>
@@ -848,109 +836,4 @@ footer {
           <img src="rooted-mark.png" alt="Rooted">
           <div class="fw"><span class="cs">R</span><span class="cb">o</span><span style="color:rgba(238,246,244,.85)">oted</span><span class="cs">.</span></div>
         </div>
-        <p class="footer-tagline">Rooted in purpose. Built for growth. Accounting, tax and advisory services in Langebaan, Western Cape.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#process">Our Process</a></li>
-          <li><a href="#team">The Team</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:info@financedeck.co.za">info@financedeck.co.za</a></li>
-          <li><a href="tel:+27731148210">+27 73 114 8210</a></li>
-          <li><a href="#">193 Sunbird Drive, Langebaan</a></li>
-          <li><a href="#">Terms &amp; Conditions</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span class="footer-copy">&copy; 2024 Rooted. All rights reserved.</span>
-      <div class="footer-social">
-        <a href="#">LinkedIn</a>
-        <a href="#">Twitter</a>
-        <a href="#">YouTube</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-// ── LENS FOCUS on load
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('hero').classList.add('lens-go');
-    setTimeout(() => {
-      document.getElementById('nav-logo').classList.add('visible');
-    }, 2400);
-  }, 300);
-});
-
-// ── NAV scroll state
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive: true });
-
-// ── MOBILE NAV (burger menu)
-const navBurger = document.getElementById('nav-burger');
-const navOverlay = document.getElementById('nav-overlay');
-function closeMenu() {
-  nav.classList.remove('menu-open');
-  navBurger.setAttribute('aria-expanded', 'false');
-}
-function toggleMenu() {
-  const open = nav.classList.toggle('menu-open');
-  navBurger.setAttribute('aria-expanded', open ? 'true' : 'false');
-}
-navBurger.addEventListener('click', toggleMenu);
-navOverlay.addEventListener('click', closeMenu);
-document.querySelectorAll('.nav-links a, .nav-cta').forEach(el => {
-  el.addEventListener('click', closeMenu);
-});
-
-// ── SCROLL REVEAL
-const revealEls = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-revealEls.forEach(el => io.observe(el));
-
-// ── HERO VIDEO — skip zoom-in intro, fade in once stable
-(function() {
-  const v = document.querySelector('.hero-mark video');
-  if (!v) return;
-  v.addEventListener('loadedmetadata', () => {
-    v.currentTime = 2.5; // skip the initial zoom-out frames
-  });
-  v.addEventListener('seeked', () => {
-    v.classList.add('ready'); // fade in now that we're on a stable frame
-  });
-})();
-
-// ── FAQ accordion
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => {
-    i.classList.remove('open');
-    i.querySelector('.faq-a').style.maxHeight = null;
-  });
-  if (!isOpen) {
-    item.classList.add('open');
-    const a = item.querySelector('.faq-a');
-    a.style.maxHeight = a.scrollHeight + 'px';
-  }
-}
-</script>
-</body>
-</html>
+        <p class="footer-t
