@@ -454,6 +454,19 @@ footer {
 .deco-cross::before { transform:translateY(-50%) rotate(45deg); }
 .deco-cross::after  { transform:translateY(-50%) rotate(-45deg); }
 .deco-cross.blue::before,.deco-cross.blue::after { background:var(--blue); }
+.deco-plus { width:14px; height:14px; opacity:.35; }
+.deco-plus::before,.deco-plus::after {
+  content:''; position:absolute; background:var(--sage2); border-radius:1px;
+}
+.deco-plus::before { top:50%; left:0; width:100%; height:2px; transform:translateY(-50%); }
+.deco-plus::after  { left:50%; top:0; height:100%; width:2px; transform:translateX(-50%); }
+.deco-plus.blue::before,.deco-plus.blue::after { background:var(--blue); }
+.deco-watermark {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  line-height:1; color:var(--df); opacity:.028;
+  font-size:clamp(160px,26vw,440px); user-select:none;
+}
+.deco-watermark.on-dark { color:var(--white); opacity:.035; }
 @media(max-width:900px){ .deco { display:none; } }
 
 /* ─────────────────────────────── RESPONSIVE */
@@ -542,6 +555,7 @@ footer {
 <!-- ══════════════════════ VALUES ══════════════════════ -->
 <section id="values">
   <div class="deco deco-cross" style="top:18px;right:6%"></div>
+  <div class="deco deco-plus blue" style="left:5%;bottom:24px"></div>
   <div class="values-grid">
     <div class="value-item reveal">
       <div class="value-icon">
@@ -576,6 +590,10 @@ footer {
 
 <!-- ══════════════════════ ABOUT ══════════════════════ -->
 <section id="about">
+  <div class="deco deco-watermark" style="top:-4%;right:-2%">R</div>
+  <div class="deco deco-ring" style="width:180px;height:180px;right:8%;top:48px"></div>
+  <div class="deco deco-dot" style="width:60px;height:60px;background:var(--sage2);opacity:.16;left:4%;bottom:10%"></div>
+  <div class="deco deco-plus" style="left:14%;top:18%"></div>
   <div class="about-inner">
     <div class="about-text">
       <span class="label reveal">Our Story</span>
@@ -642,6 +660,7 @@ footer {
 <section id="why">
   <div class="deco deco-stripes light" style="bottom:-30px;left:-30px"></div>
   <div class="deco deco-ring sage" style="width:200px;height:200px;border-color:rgba(121,174,138,.35);right:8%;top:50%"></div>
+  <div class="deco deco-watermark on-dark" style="right:-3%;bottom:-12%">o</div>
   <div class="why-inner">
     <div class="why-text">
       <span class="label reveal">Why Rooted</span>
@@ -686,6 +705,8 @@ footer {
 <!-- ══════════════════════ PROCESS ══════════════════════ -->
 <section id="process">
   <div class="deco deco-dot" style="width:70px;height:70px;background:var(--sage2);opacity:.2;left:4%;top:24px"></div>
+  <div class="deco deco-stripes" style="bottom:-40px;right:-40px"></div>
+  <div class="deco deco-plus blue" style="right:10%;top:80px"></div>
   <div class="section-header" style="max-width:1200px;margin:0 auto 72px">
     <span class="label reveal">How We Work</span>
     <h2 class="reveal">A clear path <em>forward</em></h2>
@@ -719,6 +740,7 @@ footer {
 <section id="team">
   <div class="deco deco-cross blue" style="top:48px;left:6%"></div>
   <div class="deco deco-ring" style="width:240px;height:240px;right:-80px;bottom:-80px"></div>
+  <div class="deco deco-dot" style="width:50px;height:50px;background:var(--blue);opacity:.14;right:8%;top:40px"></div>
   <div class="section-header" style="max-width:1200px;margin:0 auto 0">
     <span class="label reveal">The People Behind Rooted</span>
     <h2 class="reveal">Built on <em>experience,</em><br>driven by <em>purpose</em></h2>
@@ -754,6 +776,8 @@ footer {
 <!-- ══════════════════════ FAQ ══════════════════════ -->
 <section id="faq">
   <div class="deco deco-ring sage" style="width:280px;height:280px;right:-100px;bottom:-100px"></div>
+  <div class="deco deco-plus" style="left:8%;top:64px"></div>
+  <div class="deco deco-watermark" style="left:-2%;bottom:-8%">?</div>
   <div class="faq-inner">
     <div class="section-header reveal">
       <span class="label">Common Questions</span>
